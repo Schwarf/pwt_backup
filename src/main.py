@@ -17,10 +17,16 @@ def main() -> None:
     connection = get_database_connection(arguments.password_file)
     cursor = connection.cursor()
     cursor.execute("SELECT name FROM sys.databases")
-    for row in cursor.fetchall():
-         print(row)
-    connection.close()
+    cursor.execute('''
+    		CREATE TABLE products (
+    			product_id int,
+    			product_name nvarchar(50),
+    			price int
+    			)
+                   ''')
 
-    SchemeDefinition.metadata.create_all(engine)
+    connection.commit()
+
+#    SchemeDefinition.metadata.create_all(engine)
 if __name__ == "__main__":
     main()
