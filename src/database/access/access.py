@@ -21,7 +21,7 @@ def get_sql_alchemy_url(password_file: str) -> str:
         username = lines[0]
         password = lines[1]
         file.close()
-    url = f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+17+for+SQL+Server"
+    url =   f"mssql+pyodbc://{username}:{password}@{server}/{database}?driver=ODBC+Driver+17+for+SQL+Server"
     return url
 
 def get_database_connection(password_file: str) -> pyodbc.Connection:
