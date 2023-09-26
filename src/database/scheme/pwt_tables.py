@@ -10,19 +10,19 @@ class Workout(SchemeDefinition):
     totalRepetitions = Column(Integer, nullable=False)
     maxRepetitionsInSet = Column(Integer, nullable=False)
     performances = Column(Integer, nullable=False)
-    id = Column(Integer, nullable=False)
+    id = Column(Integer, nullable=False, primary_key=True)
 
 class Training(SchemeDefinition):
     __tablename__ = "trainings"
     name = Column(String, nullable=False)
     durationMinutes = Column(Integer, nullable=False)
     performances = Column(Integer, nullable=False)
-    id = Column(Integer, nullable=False)
+    id = Column(Integer, nullable=False, primary_key=True)
 
 
 class WorkoutTimestamp(SchemeDefinition):
     __tablename__ = "workout_timestamps"
-    id = Column(Integer, nullable=False)
+    id = Column(Integer, nullable=False, primary_key=True)
     workoutId = Column(Integer, ForeignKey("workouts.id", ondelete="CASCADE"))
     timestamp = Column(BigInteger, nullable=False)
     # Define a relationship to the Workout model (assuming the name of the related table is "workout")
@@ -30,7 +30,7 @@ class WorkoutTimestamp(SchemeDefinition):
 
 class TrainingTimestamp(SchemeDefinition):
     __tablename__ = "training_timestamps"
-    id = Column(Integer, nullable=False)
+    id = Column(Integer, nullable=False, primary_key=True)
     workoutId = Column(Integer, ForeignKey("trainings.id", ondelete="CASCADE"))
     timestamp = Column(BigInteger, nullable=False)
     # Define a relationship to the Workout model (assuming the name of the related table is "workout")
