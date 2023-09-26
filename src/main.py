@@ -1,7 +1,7 @@
 import argparse
 import sys
 
-from database_access.access import get_database_connection
+from src.database.access.access import get_database_connection
 
 def main() -> None:
     argument_parser = argparse.ArgumentParser()
