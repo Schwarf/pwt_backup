@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 from src.database.scheme.conventions import SchemeDefinition
-from src.database.access.access import get_sql_alchemy_url, get_pyodbc_connection_string
+from src.database.access.access import get_sql_alchemy_url
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -21,8 +21,8 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 target_metadata = [SchemeDefinition.metadata]
-url = get_sql_alchemy_url("/media/linux_data/projects/misc/database_access/user.txt")
-print("URL: ", url)
+
+url = get_sql_alchemy_url("/media/linux_data/projects/misc/database_access/access.txt")
 config.set_main_option("sqlalchemy.url", url)
 
 # other values from the config, defined by the needs of env.py,

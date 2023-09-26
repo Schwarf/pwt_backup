@@ -1,0 +1,2 @@
+- Do not use special symbols like @ in sql_alchemy url (e.g. in a password).
+  While there is no problem with this characters in pyodbc (and other tools), sql_alchemy does not work with it.
