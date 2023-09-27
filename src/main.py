@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from conventions import Base
 from database.connection import get_database_connection
 from src.api.receiver import WorkoutReceived, TrainingReceived
-from write.fill_tables import insert
+from write.fill_tables import insert, update
 from write.queries import *
 
 
@@ -20,8 +20,10 @@ def main() -> None:
     connection = get_database_connection(arguments.password_file)
     training = TrainingReceived(name="Jogging", durationMinutes=50, performances=1, id=2)
     workout = WorkoutReceived(name="Hallo", sets=3, totalRepetitions=22, maxRepetitions=10, performances=0, id=2)
-    insert(workout_query, workout, connection)
-    insert(training_query, training, connection)
+    #insert(workout_query, workout, connection)
+    #insert(training_query, training, connection)
+    training_update = TrainingReceived(name="Jogging", durationMinutes=50, performances=20, id=2)
+    update(update_training_query, training_update, connection)
     # cursor = connection.cursor()
     # cursor.execute("SELECT name FROM sys.databases")
     # cursor.execute('''

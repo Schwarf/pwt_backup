@@ -1,4 +1,4 @@
-from typing import Callable, Tuple
+from typing import Callable, Tuple, Type
 
 import pyodbc
 from pydantic import BaseModel
@@ -17,5 +17,10 @@ def insert(function: Callable[[BaseModel], Tuple[str, str]], data: BaseModel, co
     cursor.close()
 
 
-def update_workout(connection: pyodbc, workoutReceived: WorkoutReceived) -> None:
-    pass
+def update(function: Callable[[BaseModel], Tuple[str, str]], data: BaseModel, connection: pyodbc.Connection) -> None:
+    query, table = function(data)
+    cursor = connection.cursor()
+    cursor.execute(query)
+    connection.commit()
+    cursor.close()
+

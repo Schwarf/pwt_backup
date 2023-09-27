@@ -1,5 +1,3 @@
-from typing import Union
-
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -11,6 +9,7 @@ class WorkoutReceived(BaseModel):
     maxRepetitions: int
     performances: int
     id: int
+
 
 class TrainingReceived(BaseModel):
     name: str
