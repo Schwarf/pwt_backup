@@ -3,7 +3,10 @@ import sys
 from sqlalchemy import create_engine
 
 from conventions import Base
-from database.access.access import get_database_connection, get_sql_alchemy_url
+from database.connection import get_database_connection
+from src.api.receiver import WorkoutReceived
+from write.fill_tables import write_to_workouts_table
+
 
 def main() -> None:
     argument_parser = argparse.ArgumentParser()
@@ -13,19 +16,22 @@ def main() -> None:
     except ValueError as error:
         print("Arguments are not valid")
         sys.exit()
-    engine = create_engine(get_sql_alchemy_url(arguments.password_file))
     connection = get_database_connection(arguments.password_file)
-    cursor = connection.cursor()
-    cursor.execute("SELECT name FROM sys.databases")
-    cursor.execute('''
-    		CREATE TABLE products (
-    			product_id int,
-    			product_name nvarchar(50),
-    			price int
-    			)
-                   ''')
+    workout = WorkoutReceived(name="Hallo", sets=3, totalRepetitions=22, maxRepetitions=10, performances=0, id=1)
+    write_to_workouts_table(connection, workout)
 
-    connection.commit()
+
+    # cursor = connection.cursor()
+    # cursor.execute("SELECT name FROM sys.databases")
+    # cursor.execute('''
+    # 		CREATE TABLE products (
+    # 			product_id int,
+    # 			product_name nvarchar(50),
+    # 			price int
+    # 			)
+    #                ''')
+    #
+    # connection.commit()
 
 #    SchemeDefinition.metadata.create_all(engine)
 if __name__ == "__main__":
