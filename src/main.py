@@ -5,7 +5,8 @@ from sqlalchemy import create_engine
 from conventions import Base
 from database.connection import get_database_connection
 from src.api.receiver import WorkoutReceived, TrainingReceived
-from write.fill_tables import add_new_workout, add_new_training
+from write.fill_tables import insert
+from write.queries import *
 
 
 def main() -> None:
@@ -17,11 +18,10 @@ def main() -> None:
         print("Arguments are not valid")
         sys.exit()
     connection = get_database_connection(arguments.password_file)
-    training = TrainingReceived(name="Jogging", durationMinutes=50, performances=1, id=1)
-    #workout = WorkoutReceived(name="Hallo", sets=3, totalRepetitions=22, maxRepetitions=10, performances=0, id=1)
-    #add_new_workout(connection, workout)
-    add_new_training(connection, training)
-
+    training = TrainingReceived(name="Jogging", durationMinutes=50, performances=1, id=2)
+    workout = WorkoutReceived(name="Hallo", sets=3, totalRepetitions=22, maxRepetitions=10, performances=0, id=2)
+    insert(workout_query, workout, connection)
+    insert(training_query, training, connection)
     # cursor = connection.cursor()
     # cursor.execute("SELECT name FROM sys.databases")
     # cursor.execute('''
