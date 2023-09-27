@@ -1,2 +1,4 @@
 - Do not use special symbols like @ in sql_alchemy url (e.g. in a password).
-  While there is no problem with this characters in pyodbc (and other tools), sql_alchemy does not work with it.
+  While there is no probem with this characters in pyodbc (and other tools), sql_alchemy does not work with it.
+- It is important to import the tables in the env.py file of alembic although the tables itself will not be used
+  (and therefore removed by the IDE). Only by the import alembic is capable to identify the tables or changes.
