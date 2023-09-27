@@ -2,7 +2,7 @@ import argparse
 import sys
 from sqlalchemy import create_engine
 
-from conventions import SchemeDefinition
+from conventions import Base
 from database.access.access import get_database_connection, get_sql_alchemy_url
 
 def main() -> None:

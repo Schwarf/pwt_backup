@@ -1,12 +1,15 @@
+import os
+import sys
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-from src.database.scheme.conventions import SchemeDefinition
 from src.database.access.access import get_sql_alchemy_url
+from src.database.scheme.pwt_tables import *
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -20,7 +23,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [SchemeDefinition.metadata]
+target_metadata = [Base.metadata]
 
 url = get_sql_alchemy_url("/media/linux_data/projects/misc/database_access/access.txt")
 config.set_main_option("sqlalchemy.url", url)
@@ -73,7 +76,7 @@ def run_migrations_online() -> None:
         context.configure(
             connection=connection, target_metadata=target_metadata,
             include_schemas=True,
-            
+
         )
 
         with context.begin_transaction():

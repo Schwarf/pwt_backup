@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger
-from sqlalchemy.orm import declarative_base, relationship
-from conventions import SchemeDefinition
+from sqlalchemy.orm import relationship
+from src.database.scheme.conventions import Base, InsertionDateTime
 
 
-class Workout(SchemeDefinition):
+class Workout(Base, InsertionDateTime):
     __tablename__ = "workouts"
     name = Column(String, nullable=False)
     sets = Column(Integer, nullable=False)
@@ -12,7 +12,7 @@ class Workout(SchemeDefinition):
     performances = Column(Integer, nullable=False)
     id = Column(Integer, nullable=False, primary_key=True)
 
-class Training(SchemeDefinition):
+class Training(Base, InsertionDateTime):
     __tablename__ = "trainings"
     name = Column(String, nullable=False)
     durationMinutes = Column(Integer, nullable=False)
@@ -20,7 +20,7 @@ class Training(SchemeDefinition):
     id = Column(Integer, nullable=False, primary_key=True)
 
 
-class WorkoutTimestamp(SchemeDefinition):
+class WorkoutTimestamp(Base, InsertionDateTime):
     __tablename__ = "workout_timestamps"
     id = Column(Integer, nullable=False, primary_key=True)
     workoutId = Column(Integer, ForeignKey("workouts.id", ondelete="CASCADE"))
@@ -28,7 +28,7 @@ class WorkoutTimestamp(SchemeDefinition):
     # Define a relationship to the Workout model (assuming the name of the related table is "workout")
     workout = relationship("Workout")
 
-class TrainingTimestamp(SchemeDefinition):
+class TrainingTimestamp(Base, InsertionDateTime):
     __tablename__ = "training_timestamps"
     id = Column(Integer, nullable=False, primary_key=True)
     workoutId = Column(Integer, ForeignKey("trainings.id", ondelete="CASCADE"))
