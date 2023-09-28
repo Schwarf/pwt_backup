@@ -1,4 +1,3 @@
-from fastapi import FastAPI
 from pydantic import BaseModel
 
 
@@ -23,15 +22,8 @@ class WorkoutTimestampReceived(BaseModel):
     workoutId: int
     timestamp: int
 
+
 class TrainingTimestampReceived(BaseModel):
     id: int
     trainingId: int
     timestamp: int
-
-
-app = FastAPI()
-
-
-@app.post("/workouts/")
-async def push_workout(workout: WorkoutReceived):
-    pass
