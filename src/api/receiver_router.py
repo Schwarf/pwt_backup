@@ -3,7 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from src.database.connection import get_database_connection
 from src.database.writer.writer import insert, update
-from src.database.writer.queries import *
+import src.database.writer.queries as query
 from src.api.received_objects import *
 
 receiver_router = APIRouter()
@@ -12,7 +12,7 @@ receiver_router = APIRouter()
 @receiver_router.post("/insert_workout/")
 async def insert_workout(workout_received: WorkoutReceived, database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        insert(insert_workout, workout_received, database)
+        insert(query.insert_workout, workout_received, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
     return {"status": "Workout inserted successfully"}
@@ -20,7 +20,7 @@ async def insert_workout(workout_received: WorkoutReceived, database: pyodbc.Con
 @receiver_router.post("/insert_training/")
 async def insert_training(training_received: TrainingReceived, database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        insert(insert_training(), training_received, database)
+        insert(query.insert_training, training_received, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
     return {"status": "Training inserted successfully"}
@@ -28,7 +28,7 @@ async def insert_training(training_received: TrainingReceived, database: pyodbc.
 @receiver_router.post("/update_workout/")
 async def update_workout(workout_received: WorkoutReceived, database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        update(update_workout, workout_received, database)
+        update(query.update_workout, workout_received, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
     return {"status": "Workout updated successfully"}
@@ -36,7 +36,7 @@ async def update_workout(workout_received: WorkoutReceived, database: pyodbc.Con
 @receiver_router.post("/update_training/")
 async def update_training(training_received: TrainingReceived, database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        update(update_training, training_received, database)
+        update(query.update_training, training_received, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
     return {"status": "Training updated successfully"}
