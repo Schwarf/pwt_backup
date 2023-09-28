@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from src.api.receiver import WorkoutReceived, TrainingReceived, WorkoutTimestampReceived, TrainingTimestampReceived
+from src.api.received_objects import WorkoutReceived, TrainingReceived, WorkoutTimestampReceived, TrainingTimestampReceived
 
 
 def workout_query(workout_received: WorkoutReceived) -> Tuple[str, str]:
