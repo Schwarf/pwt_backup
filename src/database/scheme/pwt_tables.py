@@ -31,7 +31,7 @@ class WorkoutTimestamp(Base, InsertionDateTime):
 class TrainingTimestamp(Base, InsertionDateTime):
     __tablename__ = "training_timestamps"
     id = Column(Integer, nullable=False, primary_key=True)
-    workoutId = Column(Integer, ForeignKey("trainings.id", ondelete="CASCADE"))
+    trainingId = Column(Integer, ForeignKey("trainings.id", ondelete="CASCADE"))
     timestamp = Column(BigInteger, nullable=False)
     # Define a relationship to the Workout model (assuming the name of the related table is "workout")
     training = relationship("Training")

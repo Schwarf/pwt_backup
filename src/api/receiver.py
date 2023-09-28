@@ -18,6 +18,17 @@ class TrainingReceived(BaseModel):
     id: int
 
 
+class WorkoutTimestampReceived(BaseModel):
+    id: int
+    workoutId: int
+    timestamp: int
+
+class TrainingTimestampReceived(BaseModel):
+    id: int
+    trainingId: int
+    timestamp: int
+
+
 app = FastAPI()
 
 

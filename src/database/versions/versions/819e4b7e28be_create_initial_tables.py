@@ -1,8 +1,8 @@
 """Create initial tables
 
-Revision ID: a2ef3b63f6c6
+Revision ID: 819e4b7e28be
 Revises: 
-Create Date: 2023-09-28 13:07:41.862282
+Create Date: 2023-09-28 13:20:05.193177
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'a2ef3b63f6c6'
+revision: str = '819e4b7e28be'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -47,9 +47,9 @@ def upgrade() -> None:
     op.create_table('training_timestamps',
     sa.Column('insertion_time', sa.DateTime(), server_default=sa.text('CURRENT_TIMESTAMP'), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('workoutId', sa.Integer(), nullable=True),
+    sa.Column('trainingId', sa.Integer(), nullable=True),
     sa.Column('timestamp', sa.BigInteger(), nullable=False),
-    sa.ForeignKeyConstraint(['workoutId'], ['trainings.id'], name=op.f('fk_training_timestamps_workoutId_trainings'), ondelete='CASCADE'),
+    sa.ForeignKeyConstraint(['trainingId'], ['trainings.id'], name=op.f('fk_training_timestamps_trainingId_trainings'), ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_training_timestamps'))
     )
     op.create_table('workout_timestamps',

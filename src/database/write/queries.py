@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from src.api.receiver import WorkoutReceived, TrainingReceived
+from src.api.receiver import WorkoutReceived, TrainingReceived, WorkoutTimestampReceived, TrainingTimestampReceived
 
 
 def workout_query(workout_received: WorkoutReceived) -> Tuple[str, str]:
@@ -30,4 +30,17 @@ def update_workout_query(workout_received: WorkoutReceived) -> Tuple[str, str]:
     query = f"""UPDATE {table} SET name='{workout_received.name}', sets={workout_received.sets}, totalRepetitions={workout_received.totalRepetitions},
              maxRepetitionsInSet={workout_received.maxRepetitions}, performances={workout_received.performances}
                 WHERE id={workout_received.id}"""
+    return query, table
+
+
+def workout_timestamp_query(workout_timestamp_received: WorkoutTimestampReceived) -> Tuple[str, str]:
+    table = "workouts"
+    query = f"""INSERT INTO {table}(id, workoutId, timestamp) VALUES 
+        ('{workout_timestamp_received.id}', {workout_timestamp_received.workoutId}, {workout_timestamp_received.timestamp}"""
+    return query, table
+
+def training_timestamp_query(training_timestamp_received: TrainingTimestampReceived) -> Tuple[str, str]:
+    table = "trainings"
+    query = f"""INSERT INTO {table}(id, trainingId, timestamp) VALUES 
+        ('{training_timestamp_received.id}', {training_timestamp_received.trainingId}, {training_timestamp_received.timestamp}"""
     return query, table
