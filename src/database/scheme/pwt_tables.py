@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger
+from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger, DateTime
 from sqlalchemy.orm import relationship
 from src.database.scheme.conventions import Base, InsertionDateTime
 
@@ -35,3 +35,8 @@ class TrainingTimestamp(Base, InsertionDateTime):
     timestamp = Column(BigInteger, nullable=False)
     # Define a relationship to the Workout model (assuming the name of the related table is "workout")
     training = relationship("Training")
+
+class Synchronization(Base,InsertionDateTime):
+    __tablename__ = "synchronization_dates"
+    id = Column(Integer, nullable=False, primary_key=True)
+    date = Column(DateTime, nullable=False)

@@ -1,4 +1,4 @@
-from sqlalchemy import MetaData,  Column, DateTime, func
+from sqlalchemy import MetaData, Column, DateTime, func
 from sqlalchemy.ext.declarative import declarative_base
 
 naming_convention = {
@@ -8,6 +8,8 @@ naming_convention = {
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
     "pk": "pk_%(table_name)s"
 }
+
+
 class InsertionDateTime:
     insertion_time = Column(DateTime, server_default=func.now(), nullable=False)
 
