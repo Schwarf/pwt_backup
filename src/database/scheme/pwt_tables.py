@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, BigInteger, DateTime, Boolean
 from sqlalchemy.orm import relationship
 from src.database.scheme.conventions import Base, InsertionDateTime
 
@@ -11,6 +11,8 @@ class Workout(Base, InsertionDateTime):
     maxRepetitionsInSet = Column(Integer, nullable=False)
     performances = Column(Integer, nullable=False)
     id = Column(Integer, nullable=False, primary_key=True)
+    isDeleted = Column(Boolean, nullable=False, default=False)
+
 
 class Training(Base, InsertionDateTime):
     __tablename__ = "trainings"
@@ -18,6 +20,7 @@ class Training(Base, InsertionDateTime):
     durationMinutes = Column(Integer, nullable=False)
     performances = Column(Integer, nullable=False)
     id = Column(Integer, nullable=False, primary_key=True)
+    isDeleted = Column(Boolean, nullable=False, default=False)
 
 
 class WorkoutTimestamp(Base, InsertionDateTime):
@@ -27,6 +30,8 @@ class WorkoutTimestamp(Base, InsertionDateTime):
     timestamp = Column(BigInteger, nullable=False)
     # Define a relationship to the Workout model (assuming the name of the related table is "workout")
     workout = relationship("Workout")
+    isDeleted = Column(Boolean, nullable=False, default=False)
+
 
 class TrainingTimestamp(Base, InsertionDateTime):
     __tablename__ = "training_timestamps"
@@ -35,6 +40,8 @@ class TrainingTimestamp(Base, InsertionDateTime):
     timestamp = Column(BigInteger, nullable=False)
     # Define a relationship to the Workout model (assuming the name of the related table is "workout")
     training = relationship("Training")
+    isDeleted = Column(Boolean, nullable=False, default=False)
+
 
 class Synchronization(Base,InsertionDateTime):
     __tablename__ = "synchronization_dates"

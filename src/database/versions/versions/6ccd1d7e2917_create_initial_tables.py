@@ -1,8 +1,8 @@
 """Create initial tables
 
-Revision ID: 819e4b7e28be
+Revision ID: 6ccd1d7e2917
 Revises: 
-Create Date: 2023-09-28 13:20:05.193177
+Create Date: 2023-09-28 16:41:21.338914
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '819e4b7e28be'
+revision: str = '6ccd1d7e2917'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -32,6 +32,7 @@ def upgrade() -> None:
     sa.Column('durationMinutes', sa.Integer(), nullable=False),
     sa.Column('performances', sa.Integer(), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('isDeleted', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_trainings'))
     )
     op.create_table('workouts',
@@ -42,6 +43,7 @@ def upgrade() -> None:
     sa.Column('maxRepetitionsInSet', sa.Integer(), nullable=False),
     sa.Column('performances', sa.Integer(), nullable=False),
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('isDeleted', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_workouts'))
     )
     op.create_table('training_timestamps',
@@ -49,6 +51,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('trainingId', sa.Integer(), nullable=True),
     sa.Column('timestamp', sa.BigInteger(), nullable=False),
+    sa.Column('isDeleted', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['trainingId'], ['trainings.id'], name=op.f('fk_training_timestamps_trainingId_trainings'), ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_training_timestamps'))
     )
@@ -57,6 +60,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('workoutId', sa.Integer(), nullable=True),
     sa.Column('timestamp', sa.BigInteger(), nullable=False),
+    sa.Column('isDeleted', sa.Boolean(), nullable=False),
     sa.ForeignKeyConstraint(['workoutId'], ['workouts.id'], name=op.f('fk_workout_timestamps_workoutId_workouts'), ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id', name=op.f('pk_workout_timestamps'))
     )
