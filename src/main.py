@@ -3,22 +3,15 @@ import sys
 
 import pyodbc
 from fastapi import FastAPI, HTTPException, Depends
+from src.api.receiver_router import receiver_router
 from sqlalchemy import create_engine
 
 from src.database.connection import get_database_connection
 from src.database.writer.queries import *
 from src.database.writer.writer import insert
 
-app = FastAPI()
-
-
-@app.post("/workouts/")
-async def push_workout(workout_received: WorkoutReceived, database: pyodbc.Connection = Depends(get_database_connection)):
-    try:
-        insert(workout_query, workout_received, database)
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Error: {e}")
-    return {"status": "Workout added successfully"}
+api_app = FastAPI()
+api_app.include_router(receiver_router)
 
 
 def main() -> None:
