@@ -8,6 +8,7 @@ class WorkoutReceived(BaseModel):
     maxRepetitions: int
     performances: int
     id: int
+    isDeleted: bool
 
 
 class TrainingReceived(BaseModel):
@@ -15,15 +16,18 @@ class TrainingReceived(BaseModel):
     durationMinutes: int
     performances: int
     id: int
+    isDeleted: bool
 
 
 class WorkoutTimestampReceived(BaseModel):
     id: int
     workoutId: int
     timestamp: int
+    isDeleted: bool
 
 
 class TrainingTimestampReceived(BaseModel):
     id: int
     trainingId: int
     timestamp: int
+    isDeleted: bool
