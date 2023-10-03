@@ -1,3 +1,5 @@
+from typing import List
+
 from pydantic import BaseModel
 
 
@@ -31,3 +33,19 @@ class TrainingTimestampReceived(BaseModel):
     trainingId: int
     timestamp: int
     isDeleted: bool
+
+
+class WorkoutListReceived(BaseModel):
+    workouts: List[WorkoutReceived]
+
+
+class TrainingListReceived(BaseModel):
+    trainings: List[TrainingReceived]
+
+
+class WorkoutTimestampListReceived(BaseModel):
+    workout_timestamps: List[WorkoutTimestampReceived]
+
+
+class TrainingTimestampListReceived(BaseModel):
+    training_timestamps: List[TrainingTimestampReceived]
