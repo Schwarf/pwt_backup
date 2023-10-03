@@ -13,8 +13,8 @@ receiver_router = APIRouter()
 async def insert_workout(workouts_received: WorkoutListReceived,
                          database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        for workout in workouts_received:
-            insert(query.insert_workout, workout, database)
+        for workout in workouts_received.workouts:
+                insert(query.insert_workout, workout, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
     return {"status": "Workout inserted successfully"}
@@ -24,7 +24,7 @@ async def insert_workout(workouts_received: WorkoutListReceived,
 async def insert_training(trainings_received: TrainingListReceived,
                           database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        for training in trainings_received:
+        for training in trainings_received.trainings:
             insert(query.insert_training, training, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
@@ -35,7 +35,7 @@ async def insert_training(trainings_received: TrainingListReceived,
 async def update_workout(workouts_received: WorkoutListReceived,
                          database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        for workout in workouts_received:
+        for workout in workouts_received.workouts:
             update(query.update_workout, workout, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
@@ -46,7 +46,7 @@ async def update_workout(workouts_received: WorkoutListReceived,
 async def update_training(trainings_received: TrainingListReceived,
                           database: pyodbc.Connection = Depends(get_database_connection)):
     try:
-        for training in trainings_received:
+        for training in trainings_received.trainings    :
             update(query.update_training, training, database)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error: {e}")
