@@ -1,0 +1,22 @@
+curl -X 'POST' 'http://localhost:8000/insert_workouts/' -H 'accept: applicastion/json' -H 'Content-Type: application/json' -d '{
+     [
+        {
+            "name": "Workout 1",
+            "sets": 3,
+            "totalRepetitions": 30,
+            "maxRepetitions": 12,
+            "performances": 1,
+            "id": 1,
+            "isDeleted": 0
+        },
+        {
+            "name": "Workout 2",
+            "sets": 2,
+            "totalRepetitions": 20,
+            "maxRepetitions": 15,
+            "performances": 2,
+            "id": 2,
+            "isDeleted": 0
+        }
+    ]
+}'
