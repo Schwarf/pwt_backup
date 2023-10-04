@@ -1,5 +1,5 @@
 curl -X 'POST' 'http://localhost:8000/insert_workouts/' -H 'accept: applicastion/json' -H 'Content-Type: application/json' -d '{
-     [
+  "workouts" : [
         {
             "name": "Workout 1",
             "sets": 3,
