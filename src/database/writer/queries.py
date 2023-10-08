@@ -35,7 +35,7 @@ def update_workout(workout_received: WorkoutReceived) -> Tuple[str, str]:
     table = "workouts"
     is_deleted = 1 if workout_received.isDeleted else 0
     query = f"""UPDATE {table} SET name='{workout_received.name}', sets={workout_received.sets}, totalRepetitions={workout_received.totalRepetitions},
-             maxRepetitionsInSet={workout_received.maxRepetitions}, performances={workout_received.performances}, isDeleted={is_deleted}
+             maxRepetitionsInSet={workout_received.maxRepetitionsInSet}, performances={workout_received.performances}, isDeleted={is_deleted}
                 WHERE id={workout_received.id}"""
     return query, table
 

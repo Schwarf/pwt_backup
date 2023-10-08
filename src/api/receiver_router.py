@@ -15,6 +15,7 @@ async def insert_workout(workouts_received: WorkoutListReceived,
     response_string = ""
     try:
         for workout in workouts_received.workouts:
+            print(does_exist(query.does_workout_exist, workout.id, database))
             if does_exist(query.does_workout_exist, workout.id, database):
                 update(query.update_workout, workout, database)
                 response_string = "Workout UPDATED successfully!"
