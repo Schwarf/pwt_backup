@@ -43,7 +43,7 @@ async def insert_workout_timestamps(workout_timestamps_received: WorkoutTimestam
 
 
 @receiver_router.post("/insert_training_timestamps/")
-async def insert_training_timestamps(training_timestamps_received: TrainingTimestampReceived,
+async def insert_training_timestamps(training_timestamps_received: TrainingTimestampListReceived,
                                      database: pyodbc.Connection = Depends(get_database_connection)):
     try:
         for training_timestamp in training_timestamps_received.training_timestamps:
