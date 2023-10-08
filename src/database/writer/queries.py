@@ -44,7 +44,7 @@ def insert_workout_timestamp(workout_timestamp_received: WorkoutTimestampReceive
     table = "workout_timestamps"
     is_deleted = 1 if workout_timestamp_received.isDeleted else 0
     query = f"""INSERT INTO {table}(id, workoutId, timestamp, isDeleted) VALUES 
-        ('{workout_timestamp_received.id}', {workout_timestamp_received.workoutId}, {workout_timestamp_received.timestamp}, {is_deleted}"""
+        ('{workout_timestamp_received.id}', {workout_timestamp_received.workoutId}, {workout_timestamp_received.timestamp}, {is_deleted})"""
     return query, table
 
 
@@ -52,5 +52,5 @@ def insert_training_timestamp(training_timestamp_received: TrainingTimestampRece
     table = "training_timestamps"
     is_deleted = 1 if training_timestamp_received.isDeleted else 0
     query = f"""INSERT INTO {table}(id, trainingId, timestamp, isDeleted) VALUES 
-        ('{training_timestamp_received.id}', {training_timestamp_received.trainingId}, {training_timestamp_received.timestamp}, {is_deleted}"""
+        ('{training_timestamp_received.id}', {training_timestamp_received.trainingId}, {training_timestamp_received.timestamp}, {is_deleted})"""
     return query, table
