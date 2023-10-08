@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException
 import src.database.writer.queries as query
 from src.api.received_objects import *
 from src.database.connection import get_database_connection
-from src.database.writer.writer import insert, update
+from src.database.writer.writer import insert, update, does_exist
 
 receiver_router = APIRouter()
 
@@ -12,23 +12,35 @@ receiver_router = APIRouter()
 @receiver_router.post("/insert_workouts/")
 async def insert_workout(workouts_received: WorkoutListReceived,
                          database: pyodbc.Connection = Depends(get_database_connection)):
+    response_string = ""
     try:
         for workout in workouts_received.workouts:
-            insert(query.insert_workout, workout, database)
+            if does_exist(query.does_workout_exist, workout.id, database):
+                update(query.update_workout, workout, database)
+                response_string = "Workout UPDATED successfully!"
+            else:
+                insert(query.insert_workout, workout, database)
+                response_string = "Workout INSERTED successfully!"
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error in Workouts: {e}")
-    return {"status": "Workout inserted successfully"}
+    return {"status": response_string}
 
 
 @receiver_router.post("/insert_trainings/")
 async def insert_training(trainings_received: TrainingListReceived,
                           database: pyodbc.Connection = Depends(get_database_connection)):
+    response_string = ""
     try:
         for training in trainings_received.trainings:
-            insert(query.insert_training, training, database)
+            if does_exist(query.does_training_exist, training.id, database):
+                update(query.update_training, training, database)
+                response_string = "Training UPDATED successfully!"
+            else:
+                insert(query.insert_training, training, database)
+                response_string = "Training INSERTED successfully!"
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error in Trainings: {e}")
-    return {"status": "Training inserted successfully"}
+    return {"status": response_string}
 
 
 @receiver_router.post("/insert_workout_timestamps/")

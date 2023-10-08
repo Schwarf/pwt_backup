@@ -16,6 +16,16 @@ def insert(query_table_provider: Callable[[BaseModel], Tuple[str, str]], data: B
     cursor.close()
 
 
+def does_exist(query_table_provider: Callable[[BaseModel], Tuple[str, str]], id: int,
+           connection: pyodbc.Connection) -> bool:
+    query, table = query_table_provider(id)
+    cursor = connection.cursor()
+    cursor.execute(query)
+    result = cursor.fetchone()
+    cursor.close()
+    return result[0] > 0
+
+
 def update(query_table_provider: Callable[[BaseModel], Tuple[str, str]], data: BaseModel,
            connection: pyodbc.Connection) -> None:
     query, table = query_table_provider(data)

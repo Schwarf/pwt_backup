@@ -54,3 +54,15 @@ def insert_training_timestamp(training_timestamp_received: TrainingTimestampRece
     query = f"""INSERT INTO {table}(id, trainingId, timestamp, isDeleted) VALUES 
         ('{training_timestamp_received.id}', {training_timestamp_received.trainingId}, {training_timestamp_received.timestamp}, {is_deleted})"""
     return query, table
+
+
+def does_workout_exist(workout_id: int) -> Tuple[str, str]:
+    table = "workouts"
+    query = f"""SELECT COUNT(*) FROM {table} WHERE id = {workout_id}"""
+    return query, table
+
+
+def does_training_exist(training_id: int) -> Tuple[str, str]:
+    table = "trainings"
+    query = f"""SELECT COUNT(*) FROM {table} WHERE id = {training_id}"""
+    return query, table
