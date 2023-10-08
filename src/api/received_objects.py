@@ -7,7 +7,7 @@ class WorkoutReceived(BaseModel):
     name: str
     sets: int
     totalRepetitions: int
-    maxRepetitions: int
+    maxRepetitionsInSet: int
     performances: int
     id: int
     isDeleted: bool

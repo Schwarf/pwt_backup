@@ -9,7 +9,7 @@ def insert_workout(workout_received: WorkoutReceived) -> Tuple[str, str]:
     is_deleted = 1 if workout_received.isDeleted else 0
     query = f"""INSERT INTO {table}(name, sets, totalRepetitions, maxRepetitionsInSet, performances, id, isDeleted) VALUES 
         ('{workout_received.name}', {workout_received.sets}, {workout_received.totalRepetitions}, 
-        {workout_received.maxRepetitions}, {workout_received.performances}, {workout_received.id}, {is_deleted})"""
+        {workout_received.maxRepetitionsInSet}, {workout_received.performances}, {workout_received.id}, {is_deleted})"""
     return query, table
 
 
