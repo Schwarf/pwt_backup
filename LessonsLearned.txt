@@ -2,3 +2,4 @@
   While there is no probem with this characters in pyodbc (and other tools), sql_alchemy does not work with it.
 - It is important to import the tables in the env.py file of alembic although the tables itself will not be used
   (and therefore removed by the IDE). Only by the import alembic is capable to identify the tables or changes.
+- It is important to write this stuff down.
