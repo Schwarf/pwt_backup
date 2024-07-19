@@ -1,6 +1,6 @@
 from typing import Tuple
 
-from src.api.received_objects import WorkoutReceived, TrainingReceived, WorkoutTimestampReceived, \
+from api.received_objects import WorkoutReceived, TrainingReceived, WorkoutTimestampReceived, \
     TrainingTimestampReceived
 
 

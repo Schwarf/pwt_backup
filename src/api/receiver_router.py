@@ -1,10 +1,10 @@
 import pyodbc
 from fastapi import APIRouter, Depends, HTTPException
 
-import src.database.writer.queries as query
-from src.api.received_objects import *
-from src.database.connection import get_database_connection
-from src.database.writer.writer import insert, update, does_exist
+import database.writer.queries as query
+from api.received_objects import *
+from database.connection import get_database_connection
+from database.writer.writer import insert, update, does_exist
 
 receiver_router = APIRouter()
 

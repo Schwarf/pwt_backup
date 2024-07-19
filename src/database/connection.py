@@ -1,6 +1,6 @@
 import pyodbc
 
-from src.database.access.access import get_pyodbc_connection_string
+from database.access.access import get_pyodbc_connection_string
 
 
 def get_database_connection() -> pyodbc.Connection:
